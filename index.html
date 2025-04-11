@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Comfort for You</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --main-pink: #ff66a6;
+      --main-pink-dark: #ff3385;
+      --bg-gradient: linear-gradient(-45deg, #ffe6f0, #e0f7fa, #fce4ec, #e1f5fe);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--bg-gradient);
+      background-size: 400% 400%;
+      animation: bgAnim 12s ease infinite;
+    }
+
+    @keyframes bgAnim {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      padding: 30px 20px;
+      max-width: 90%;
+      width: 500px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: floatCard 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatCard {
+      from { transform: translateY(0); }
+      to { transform: translateY(-8px); }
+    }
+
+    h1 {
+      font-size: 1.8em;
+      color: #d63384;
+      margin-bottom: 20px;
+    }
+
+    #message {
+    font-size: 1.1em;
+    color: #444;
+    min-height: 120px;
+    white-space: pre-wrap;
+    text-align: left;
+    padding: 10px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+    max-height: 200px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    }
+
+    #message::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+    }
+
+    img {
+      border-radius: 20px;
+      margin: 15px 0;
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(45deg);
+      animation: floatUp 6s infinite ease-in;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { top: 0; left: -10px; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5em;
+      }
+
+      #message {
+        font-size: 1em;
+        max-height: 180px;
+      }
+
+      .container {
+        padding: 25px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts">
+  <script>
+    for (let i = 0; i < 20; i++) {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.animationDuration = `${4 + Math.random() * 4}s`;
+      heart.style.animationDelay = `${Math.random() * 5}s`;
+      document.querySelector('.hearts').appendChild(heart);
+    }
+  </script>
+</div>
+
+<div class="container">
+  <h1>Dear Yaya 💖</h1>
+  <div id="message">Tekan butang tu klau nak tengok ayat maneh aku HAHAHA 💌</div>
+  <img id="comfort-img" src="https://www.icegif.com/wp-content/uploads/2023/05/icegif-184.gif" 
+     alt="Comforting Image" style="display: none; border-radius: 20px; margin: 15px 0; max-height: 200px; object-fit: cover;">
+</div>
+
+<script>
+  const messageText = 
+    "Haii yaya 💌\n\nI know it's been tough lately. kawan-kawan diploma kamu ada circle sendiri apa semua kan… and you're sitting there wondering where you fit in now.\n\n aku tau sakit. tpi aku nak hang tau, aku ada ja sini, memang aku takdak depan hg tpi percaya cakap aku, aku kisah pasai hg, pasai apa jdi dekat hg and I know how heavy it feels.\n\nBut please don’t think you’re any less worthy because you’re not part of a group, or because no one asked you to be part of anything they do. Sometimes, the best friendships come a little later srs, slower to build, but stronger in time.\n\nYou are not invisible. You're not forgotten. You’re someone with a beautiful soul, and the right people which the ones who truly see you, they’ll find their way to you, just as you will to them.\n\nFor now, let yourself feel what you need to. Cry if you must. But don’t give up on your heart. You’re not alone in this world, even if it feels like it. You are loved, and one day, you’ll look back and realize you made it and you weren’t truly alone after all. 🌙\n\nHang in there, okay? One day at a time. One breath at a time. You’ve got this. love you, \n\nsincerely \n\nAjiem imut💖";
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function typeMessage() {
+    const messageDiv = document.getElementById("message");
+    const image = document.getElementById("comfort-img");
+
+    messageDiv.textContent = '';
+    image.style.display = "none"; // Hide image if clicked again
+    messageDiv.scrollTop = 0;
+
+    for (let i = 0; i < messageText.length; i++) {
+      messageDiv.textContent += messageText.charAt(i);
+      messageDiv.scrollTop = messageDiv.scrollHeight;
+      await sleep(30);
+    }
+
+    image.style.display = "inline-block"; // Show image after message fully types out
+  }
+
+  // Call the typeMessage function as soon as the page loads
+  window.onload = function() {
+    typeMessage();
+  };
+</script>
+
+</body>
+</html>
