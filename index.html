@@ -55,6 +55,7 @@
     }
 
     #message {
+    display: none; /* <-- hide initially */
     font-size: 1.1em;
     color: #444;
     min-height: 120px;
@@ -183,7 +184,7 @@
 
 <div class="container">
   <h1>Dear Yaya 💖</h1>
-  <div id="message">Tekan butang tu klau nak tengok ayat maneh aku HAHAHA 💌</div>
+  <div id="message"></div>
   <img id="comfort-img" src="https://www.icegif.com/wp-content/uploads/2023/05/icegif-184.gif" alt="Comforting Image" style="display: none;">
   <br>
   <button id="showMessageBtn" onclick="typeMessage()">Tekan Sini</button>
@@ -219,28 +220,30 @@ Ajiem imut💖`;
   }
 
   async function typeMessage() {
-    const messageDiv = document.getElementById("message");
-    const image = document.getElementById("comfort-img");
-    const button = document.getElementById("showMessageBtn");
-    const audio = document.getElementById("bg-audio");
+  const messageDiv = document.getElementById("message");
+  const image = document.getElementById("comfort-img");
+  const button = document.getElementById("showMessageBtn");
+  const audio = document.getElementById("bg-audio");
 
-    messageDiv.textContent = '';
-    image.style.display = "none";
-    messageDiv.scrollTop = 0;
-    button.remove(); // Remove the button on first click
+  messageDiv.textContent = '';
+  messageDiv.style.display = "block"; // <-- show message box now
+  image.style.display = "none";
+  messageDiv.scrollTop = 0;
+  button.remove();
 
-    audio.play().catch(err => {
-      console.log("Autoplay failed:", err);
-    });
+  audio.play().catch(err => {
+    console.log("Autoplay failed:", err);
+  });
 
-    for (let i = 0; i < messageText.length; i++) {
-      messageDiv.textContent += messageText.charAt(i);
-      messageDiv.scrollTop = messageDiv.scrollHeight;
-      await sleep(30);
-    }
-
-    image.style.display = "inline-block";
+  for (let i = 0; i < messageText.length; i++) {
+    messageDiv.textContent += messageText.charAt(i);
+    messageDiv.scrollTop = messageDiv.scrollHeight;
+    await sleep(30);
   }
+
+  image.style.display = "inline-block";
+}
+
 </script>
 
 </body>
