@@ -72,6 +72,24 @@
     display: none; /* Chrome, Safari, Opera */
     }
 
+
+    button {
+      background-color: var(--main-pink);
+      border: none;
+      color: white;
+      padding: 12px 28px;
+      font-size: 1em;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    button:hover {
+      background-color: var(--main-pink-dark);
+    }
+
     img {
       border-radius: 20px;
       margin: 15px 0;
@@ -132,6 +150,11 @@
         font-size: 1.5em;
       }
 
+      button {
+        width: 100%;
+        font-size: 1em;
+      }
+
       #message {
         font-size: 1em;
         max-height: 180px;
@@ -161,13 +184,35 @@
 <div class="container">
   <h1>Dear Yaya 💖</h1>
   <div id="message">Tekan butang tu klau nak tengok ayat maneh aku HAHAHA 💌</div>
-  <img id="comfort-img" src="https://www.icegif.com/wp-content/uploads/2023/05/icegif-184.gif" 
-     alt="Comforting Image" style="display: none; border-radius: 20px; margin: 15px 0; max-height: 200px; object-fit: cover;">
+  <img id="comfort-img" src="https://www.icegif.com/wp-content/uploads/2023/05/icegif-184.gif" alt="Comforting Image" style="display: none;">
+  <br>
+  <button id="showMessageBtn" onclick="typeMessage()">Tekan Sini</button>
 </div>
+
+<audio id="bg-audio">
+  <source src="bg.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
 <script>
   const messageText = 
-    "Haii yaya 💌\n\nI know it's been tough lately. kawan-kawan diploma kamu ada circle sendiri apa semua kan… and you're sitting there wondering where you fit in now.\n\n aku tau sakit. tpi aku nak hang tau, aku ada ja sini, memang aku takdak depan hg tpi percaya cakap aku, aku kisah pasai hg, pasai apa jdi dekat hg and I know how heavy it feels.\n\nBut please don’t think you’re any less worthy because you’re not part of a group, or because no one asked you to be part of anything they do. Sometimes, the best friendships come a little later srs, slower to build, but stronger in time.\n\nYou are not invisible. You're not forgotten. You’re someone with a beautiful soul, and the right people which the ones who truly see you, they’ll find their way to you, just as you will to them.\n\nFor now, let yourself feel what you need to. Cry if you must. But don’t give up on your heart. You’re not alone in this world, even if it feels like it. You are loved, and one day, you’ll look back and realize you made it and you weren’t truly alone after all. 🌙\n\nHang in there, okay? One day at a time. One breath at a time. You’ve got this. love you, \n\nsincerely \n\nAjiem imut💖";
+`Haii yaya 💌
+
+I know it's been tough lately. kawan-kawan diploma kamu ada circle sendiri apa semua kan… and you're sitting there wondering where you fit in now.
+
+aku tau sakit. tpi aku nak hang tau, aku ada ja sini, memang aku takdak depan hg tpi percaya cakap aku, aku kisah pasai hg, pasai apa jdi dekat hg and I know how heavy it feels.
+
+But please don’t think you’re any less worthy because you’re not part of a group, or because no one asked you to be part of anything they do. Sometimes, the best friendships come a little later srs, slower to build, but stronger in time.
+
+You are not invisible. You're not forgotten. You’re someone with a beautiful soul, and the right people which the ones who truly see you, they’ll find their way to you, just as you will to them.
+
+For now, let yourself feel what you need to. Cry if you must. But don’t give up on your heart. You’re not alone in this world, even if it feels like it. You are loved, and one day, you’ll look back and realize you made it and you weren’t truly alone after all. 🌙
+
+Hang in there, okay? One day at a time. One breath at a time. You’ve got this. love you, 
+
+sincerely 
+
+Ajiem imut💖`;
 
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -176,10 +221,17 @@
   async function typeMessage() {
     const messageDiv = document.getElementById("message");
     const image = document.getElementById("comfort-img");
+    const button = document.getElementById("showMessageBtn");
+    const audio = document.getElementById("bg-audio");
 
     messageDiv.textContent = '';
-    image.style.display = "none"; // Hide image if clicked again
+    image.style.display = "none";
     messageDiv.scrollTop = 0;
+    button.remove(); // Remove the button on first click
+
+    audio.play().catch(err => {
+      console.log("Autoplay failed:", err);
+    });
 
     for (let i = 0; i < messageText.length; i++) {
       messageDiv.textContent += messageText.charAt(i);
@@ -187,13 +239,8 @@
       await sleep(30);
     }
 
-    image.style.display = "inline-block"; // Show image after message fully types out
+    image.style.display = "inline-block";
   }
-
-  // Call the typeMessage function as soon as the page loads
-  window.onload = function() {
-    typeMessage();
-  };
 </script>
 
 </body>
